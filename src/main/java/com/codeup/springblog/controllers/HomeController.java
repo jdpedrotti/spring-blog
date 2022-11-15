@@ -6,18 +6,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class HelloController {
+public class HomeController {
 
-    @GetMapping("/hello")
+    @GetMapping("/landing")
     @ResponseBody
     public String helloWorld() {
-        return "Hello World";
+        return "This is the landing page!";
     }
 
-    @GetMapping("/hello/{name}")
-    @ResponseBody
-    public String sayHello(@PathVariable String name) {
-        return "Hello " + name + "!";
-    }
+
 
 }
