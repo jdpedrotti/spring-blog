@@ -1,0 +1,13 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+
+}
+
+a:hover {
+    color: chartreuse;
+}
+
+
+
