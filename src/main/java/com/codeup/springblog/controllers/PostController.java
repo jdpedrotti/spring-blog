@@ -1,33 +1,43 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.Post;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
+@RequestMapping("/posts")
 public class PostController {
 
-    @GetMapping("/posts")
-    @ResponseBody
-    public String posts() {
-        return "posts index page";
+
+    @GetMapping
+
+    public String allPosts(Model model) {
+        Post post1 = new Post(1, "First", "This is the first post");
+        Post post2 = new Post(2, "Second", "Hey everyone, I'm back lol");
+        List<Post> allPosts = new ArrayList<>(List.of(post1, post2));
+        model.addAttribute("allPosts", allPosts);
+
+        return "/posts/index";
     }
 
-    @GetMapping("/posts/{id}")
-    @ResponseBody
-    public String postsID(@PathVariable long id) {
-        return "Post id: " + id;
+    @GetMapping("/{id}")
+
+    public String postsID(@PathVariable long id, Model model) {
+        Post post3 = new Post(3, "yo", "This is the third post");
+        model.addAttribute("post", post3);
+//        model.addAttribute("postId", id);
+        return "posts/show";
     }
 
-    @GetMapping("/posts/create")
-    @ResponseBody
-    public String viewPost() {
-        return "This is the form to VIEW a post";
-    }
 
-    @PostMapping("/posts/create")
+    @PostMapping("/create")
     @ResponseBody
     public String createPost() {
-        return "This is the form to CREATE a post";
+        return "This is the form to create a post";
     }
 
 }
