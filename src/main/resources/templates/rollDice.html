@@ -5,7 +5,10 @@
     <title>Roll the Dice!</title>
 </head>
 <body>
-    <h1>Pick a number:</h1>
+
+<nav th:replace="partials/navbar.html :: bootstrap-nav"></nav>
+<header th:replace="partials/header.html :: bootstrap-header"></header>
+
 
     <ul>
         <li><a href="/roll-dice/1">1</a></li>
@@ -22,6 +25,7 @@
         <p th:if="${guessedNum != roll}">You guessed incorrectly!</p>
     </div>
 
+<footer th:replace="partials/footer.html :: bootstrap-footer"></footer>
 
 </body>
 </html>
