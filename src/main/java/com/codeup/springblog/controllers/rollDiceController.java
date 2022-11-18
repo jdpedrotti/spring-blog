@@ -1,8 +1,11 @@
 package com.codeup.springblog.controllers;
 
 
+import com.codeup.springblog.models.RollDiceApp;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -11,8 +14,19 @@ public class rollDiceController {
 
     @GetMapping
     public String dice(){
-        return "roll-dice";
+        return "rollDice";
     }
+
+
+    @GetMapping("/{num}")
+    public String dice(@PathVariable int num, Model model){
+        RollDiceApp roll = new RollDiceApp();
+        model.addAttribute("roll", roll.randomRoll());
+        model.addAttribute("guessedNum", num);
+
+        return "rollDice";
+    }
+
 
 
 
