@@ -1,14 +1,15 @@
 package com.codeup.springblog.models;
 
-import org.hibernate.annotations.Table;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
 
-public class Post {
+
 
     @Entity
+    @Table(name = "posts")
     public class Post {
+        @javax.persistence.Id
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private long id;
@@ -58,6 +59,11 @@ public class Post {
             this.id = id;
         }
 
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+
     }
-}
+
 
