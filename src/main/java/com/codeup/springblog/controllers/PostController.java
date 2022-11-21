@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,13 @@ import java.util.List;
 @RequestMapping("/posts")
 public class PostController {
 
+// Dependency Injection
+    private PostRepository postsDao;
+
+    public PostController(PostRepository postsDao) {
+        this.postsDao = postsDao;
+    }
+//^^
 
     @GetMapping
 
@@ -34,10 +42,16 @@ public class PostController {
     }
 
 
-    @PostMapping("/create")
-    @ResponseBody
+    @GetMapping("/create")
     public String createPost() {
-        return "This is the form to create a post";
+        return "/posts/create";
+    }
+
+    @PostMapping("/create")
+    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+        Post post = new Post(title, body);
+        postsDao.save(post);
+        return "redirect:/posts";
     }
 
 }

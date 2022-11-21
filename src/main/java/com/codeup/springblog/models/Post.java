@@ -14,11 +14,12 @@ import javax.persistence.*;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private long id;
 
+
         @Column(nullable = false, length = 100)
         private String title;
 
 
-        @Column(nullable = false)
+        @Column(nullable = false, length = 500)
         private String body;
 
         public Post() {
