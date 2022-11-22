@@ -26,7 +26,7 @@ public class PostController {
     public String allPosts(Model model) {
         Post post1 = new Post(1, "First", "This is the first post");
         Post post2 = new Post(2, "Second", "Hey everyone, I'm back lol");
-        List<Post> allPosts = new ArrayList<>(List.of(post1, post2));
+        List<Post> allPosts = postsDao.findAll();
         model.addAttribute("allPosts", allPosts);
 
         return "/posts/index";

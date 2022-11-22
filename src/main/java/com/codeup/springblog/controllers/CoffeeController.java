@@ -1,6 +1,9 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Coffee;
+import com.codeup.springblog.models.Supplier;
+import com.codeup.springblog.repositories.CoffeeRepository;
+import com.codeup.springblog.repositories.SupplierRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +14,15 @@ import java.util.List;
 @Controller
 @RequestMapping("/coffee")
 public class CoffeeController {
+
+    private final CoffeeRepository coffeeDao;
+    private final SupplierRepository supplierDao;
+
+    public CoffeeController(CoffeeRepository coffeeDao, SupplierRepository supplierDao) {
+        this.coffeeDao = coffeeDao;
+        this.supplierDao = supplierDao;
+    }
+
 
     @GetMapping
     public String coffee(){
@@ -38,7 +50,18 @@ public class CoffeeController {
         return "coffee";
     }
 
+    @GetMapping("/suppliers")
+    public String showSuppliersForm(Model model){
+        List<Supplier> suppliers = supplierDao.findAll();
+        model.addAttribute("suppliers", suppliers);
+        return "/suppliers";
+    }
 
-
+    @PostMapping("/suppliers")
+    public String insertSupplier(@RequestParam(name = "name") String name){
+        Supplier supplier = new Supplier(name);
+        supplierDao.save(new Supplier(name));
+        return "redirect:/coffee/suppliers";
+    }
 
 }

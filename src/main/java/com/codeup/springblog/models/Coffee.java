@@ -2,11 +2,26 @@ package com.codeup.springblog.models;
 
 // This is a POJO (Plain Old Java Object)
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "coffees")
 public class Coffee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(nullable = false)
     private String roast;
+
+    @Column(nullable = false)
     private String origin;
 
+    @Column(nullable = false)
     private String brand;
+
+    @ManyToOne
+    private Supplier supplier;
 
     public Coffee() {
     }
