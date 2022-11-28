@@ -11,17 +11,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 50, unique = true)
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 60)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
 
 //  Getters and Setters
@@ -57,8 +56,22 @@ public class User {
         this.password = password;
     }
 
-//  Constructors
+    public List<Post> getUserPosts() {
+        return posts;
+    }
+
+    public void setUserPosts(List<Post> userPosts) {
+        this.posts = userPosts;
+    }
+
+    //  Constructors
     public User(){
+    }
+
+    public User(String username, String email, String password){
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public User(long id, String username, String email, String password){
@@ -67,5 +80,14 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    public User(long id, String username, String email, String password, List<Post> userPosts){
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.posts = userPosts;
+    }
+
 
 }
