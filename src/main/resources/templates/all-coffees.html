@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Our Coffees</title>
+</head>
+<body>
+<div>
+  <ul>
+    <li th:each="coffee : ${coffees}">
+      <a th:href="@{|/coffee/${coffee.getId()}|}">
+        <span th:text="${coffee.brand}"></span>
+        <span th:text="${coffee.origin}"></span>
+        <span th:text="${coffee.roast}"></span>
+        <button class="favorite" th:data-coffee-id="coffee.id" th:data-customer-id="1">Favorite</button>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>

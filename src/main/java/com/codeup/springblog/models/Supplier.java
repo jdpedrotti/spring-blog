@@ -1,7 +1,5 @@
 package com.codeup.springblog.models;
 
-import org.springframework.stereotype.Controller;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -34,6 +32,20 @@ public class Supplier {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Coffee> getCoffees() {
+        return coffees;
+    }
+
+    public void setCoffees(List<Coffee> coffees) {
+        this.coffees = coffees;
+    }
+
+    public Supplier(List<Coffee> coffees) {
+        this.coffees = coffees;
+    }
+
+
 
     public Supplier() {
     }
