@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Edit Post: </title>
@@ -7,6 +8,16 @@
 <body>
 
 <h2>Edit a Post</h2>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- ... -->
+<div sec:authorize="isAuthenticated()">
+    This content is only shown to authenticated users.
+
+    User ID: <span th:text="${#authentication.principal.id}"/>
+    Username: <span th:text="${#authentication.principal.username}"/>
+    Email: <span th:text="${#authentication.principal.email}"/>
+</div>
 
 <!--This HTML page should contain a form for creating a new post.-->
     <form th:action="@{|/posts/${id}/edit|}" method="post" th:object="${post}">
