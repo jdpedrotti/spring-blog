@@ -63,19 +63,23 @@ public class PostController {
     @GetMapping("/{id}/edit")
     public String showEditPostForm(@PathVariable long id, Model model) {
         Post post = postsDao.findById(id);
-        model.addAttribute("post", postsDao.findById(id));
+        model.addAttribute("post", post);
         return "/posts/edit";
     }
 
     @PostMapping("/{id}/edit")
     public String editPost(@ModelAttribute Post post) {
-        User user = usersDao.findById(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        long UserId = user.getId();
         post.setUser(user);
         postsDao.save(post);
         return "redirect:/posts";
     }
 
 
+
+// replace show edit post form and edit post code with javiers code -- allows users to only edit their posts
+    // fix index and edit html with javiers code
 
 
 
