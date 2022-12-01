@@ -4,6 +4,7 @@ import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,12 +50,13 @@ public class PostController {
 
     @PostMapping("/create")
     public String submitPost(@ModelAttribute Post post) {
-        User user = usersDao.findById(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long UserId = user.getId();
+        user = usersDao.findById(UserId);
         post.setUser(user);
         postsDao.save(post);
         return "redirect:/posts";
     }
-
 
 //    Refactor your PostController and create form to implement form model binding.
 
@@ -72,6 +74,10 @@ public class PostController {
         postsDao.save(post);
         return "redirect:/posts";
     }
+
+//    When a post is created, assign the logged in user as the owner of that post.
+
+
 
 
 
