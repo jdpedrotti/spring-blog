@@ -75,7 +75,6 @@ public class PostController {
         return "redirect:/posts";
     }
 
-//    When a post is created, assign the logged in user as the owner of that post.
 
 
 
