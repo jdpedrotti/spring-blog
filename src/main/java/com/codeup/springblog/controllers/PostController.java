@@ -5,6 +5,7 @@ import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import com.codeup.springblog.services.EmailService;
+import com.codeup.springblog.utils.Utils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,6 +79,18 @@ public class PostController {
 //        long UserId = user.getId();
         post.setUser(user);
         postsDao.save(post);
+        return "redirect:/posts";
+    }
+
+    // Get method to delete post from database
+    @GetMapping("/{id}/delete")
+    public String deletePost(@PathVariable long id) {
+        User user = usersDao.findById(Utils.currentUserId());
+        Post post = postsDao.findById(id);
+        // Only deletes post if correct user sending post request
+        if (user.getId() == post.getUser().getId()) {
+            postsDao.delete(post);
+        }
         return "redirect:/posts";
     }
 
