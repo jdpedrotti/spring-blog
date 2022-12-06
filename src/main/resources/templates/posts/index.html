@@ -14,9 +14,11 @@
         <h2 th:text="${post.title}"></h2>
         <p>User: <span th:text="${post.user.username}"></span></p>
         <p th:text="${post.body}"></p>
-        <p th:if="${post.user.id} == ${#authentication.principal.id}">
+        <span sec:authorize = "isAuthenticated()">
+         <p th:if="${post.user.id == #authentication.principal.id}">
             <button th:data-id="${post.id}" class="editButton">Edit</button>
         </p>
+        </span>
     </li>
 </ul>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
